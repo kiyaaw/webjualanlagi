@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dimsum Goreng Keju | happydimstore</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #fff9e2 0%, #fff5c7 40%, #ffefad 100%);
+      color: #3b2e00;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(90deg, #fff2b0 0%, #ffeaa0 100%);
+      border-bottom: 2px solid #f2d774;
+      box-shadow: 0 4px 12px rgba(255, 200, 0, 0.25);
+      padding: 0;
+    }
+
+   
+    .home-icon {
+      position: absolute;
+      top: 48px;
+      left: 12px;
+      font-size: 1.5em;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 5px;
+      transition: 0.2s ease;
+    }
+
+    .home-icon svg {
+      width: 2.5em;
+      height: 2.5em;
+      fill: black; 
+    }
+
+    .home-icon:hover {
+      transform: scale(1.20);
+    }
+   
+    .marquee {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      background: #3b2e00;
+      color: #fff4c4;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 8px 0;
+      letter-spacing: 2px;
+    }
+
+    .marquee span {
+      display: inline-block;
+      animation: move 20s linear infinite;
+    }
+
+    @keyframes move {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff4c4;
+      padding: 10px 22px;
+      border-radius: 15px;
+      border: 2px solid #ffe58b;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      font-size: 1.9em;
+      color: #3b2e00;
+      margin: 15px 0;
+      transition: 0.3s;
+    }
+
+    .logo:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo .cheese {
+      font-size: 1.2em;
+      animation: wiggle 2s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(10deg); }
+    }
+
+    .product-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 60px;
+      gap: 60px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .product-image {
+      flex: 1 1 450px;
+      text-align: center;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      border: 4px solid #fff4bf;
+      transition: 0.4s ease;
+    }
+
+    .product-image img:hover {
+      transform: scale(1.03);
+    }
+
+    .product-details {
+      flex: 1 1 450px;
+      max-width: 550px;
+    }
+
+    .product-details h1 {
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      font-size: 3.2em;
+      margin-bottom: 15px;
+      color: #3b2e00;
+    }
+
+    .product-details p.tagline {
+      color: #5e4500;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      letter-spacing: 2px;
+    }
+
+    .product-details p.description {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      color: #4a3900;
+    }
+
+    .composition {
+      position: relative;
+      background: linear-gradient(180deg, #fff8d0 0%, #fff0ae 100%);
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-top: 40px;
+      border: 1px solid #ffe17f;
+    }
+
+    .composition h2 {
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      color: #3b2e00;
+      border-left: 4px solid #3b2e00;
+      padding-left: 10px;
+      font-family: "Fredoka", sans-serif;
+    }
+
+    .composition ul {
+      list-style: none;
+    }
+
+    .composition li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f3e18b;
+      font-size: 1em;
+      color: #3d3200;
+    }
+
+    .composition li:last-child {
+      border-bottom: none;
+    }
+
+    .cheese-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 120px;
+      opacity: 0.8;
+      z-index: 10;
+    }
+
+    .bottom-cheese {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      width: 120px;
+      opacity: 0.25;
+      z-index: 1;
+      animation: slowFloat 6s ease-in-out infinite;
+    }
+
+    footer {
+      margin-top: 100px;
+      background: linear-gradient(90deg, #fff3b5 0%, #fff0a3 100%);
+      color: #3b2e00;
+      text-align: center;
+      padding: 35px 20px;
+      font-size: 0.95em;
+      font-weight: 600;
+      border-top: 2px solid #ffe58f;
+      box-shadow: 0 -3px 8px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 900px) {
+      .product-section {
+        padding: 60px 20px;
+      }
+      .product-details h1 {
+        font-size: 2.4em;
+      }
+      .product-image img {
+        max-width: 380px;
+      }
+      header .logo {
+        font-size: 1.6em;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .product-details h1 {
+        font-size: 2em;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes slowFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+
+    <div class="marquee">
+      <span>★ HAPPY DIMSUM STORE ★ HAPPY DIMSUM STORE ★ HAPPY DIMSUM STORE ★ HAPPY DIMSUM STORE ★ HAPPY DIMSUM STORE ★</span>
+    </div>
+
+     <a href="beranda.html" class="home-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3L12 3z"/>
+      </svg>
+    </a>
+
+    <div class="logo">
+      <span class="cheese">🧀</span>
+      happydimstore
+      <span class="cheese">🧀</span>
+    </div>
+  </header>
+
+  <section class="product-section">
+    <div class="product-image">
+      <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp" alt="Dimsum Goreng Keju renyah dengan keju leleh di dalamnya">
+    </div>
+
+    <div class="product-details">
+      <p class="tagline">Camilan Premium</p>
+      <h1>Dimsum Goreng Keju</h1>
+      <p class="description">
+        Dimsum goreng dengan isian daging ayam lembut dan keju leleh di dalamnya. 
+        Teksturnya renyah di luar, gurih dan creamy di dalam. 
+        Disajikan hangat — cocok untuk camilan sore atau hidangan keluarga.
+      </p>
+
+      <div class="composition">
+        <img src="https://png.pngtree.com/png-vector/20241217/ourmid/pngtree-cheesy-delight-melting-cheese-with-holes-clipart-illustration-png-image_14779103.png" alt="ikon keju lucu" class="cheese-icon">
+        <h2>Komposisi</h2>
+        <ul>
+          <li>Daging ayam cincang segar</li>
+          <li>Keju Prochiz</li>
+          <li>Tepung tapioka premium</li>
+          <li>Bawang putih dan bawang merah</li>
+          <li>Bumbu rempah khas happydim.store</li>
+          <li>Kulit lumpia renyah</li>
+          <li>Minyak goreng pilihan</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <img src="https://png.pngtree.com/png-vector/20241217/ourmid/pngtree-cheesy-delight-melting-cheese-with-holes-clipart-illustration-png-image_14779103.png" alt="hiasan keju" class="bottom-cheese">
+
+  <footer>
+    <p>happydimstore</p>
+  </footer>
+
+</body>
+</html>
