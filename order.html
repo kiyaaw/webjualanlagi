@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Dimstore</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fffde7, #fff59d, #fff8e1);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .marquee {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      background: black;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 10px 0;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    .marquee span {
+      display: inline-block;
+      animation: move 20s linear infinite;
+    }
+
+    @keyframes move {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .home-icon {
+      position: absolute;
+      top: 70px;
+      left: 12px;
+      font-size: 1.8em;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 30px;
+      transition: 0.2s ease;
+    }
+
+    .home-icon svg {
+      width: 2.5em;
+      height: 2.5em;
+      fill: black; 
+    }
+
+    .home-icon:hover {
+      transform: scale(1.12);
+    } 
+
+    .cheese-bubble {
+      position: absolute;
+      background: rgba(255, 223, 0, 0.3);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .cheese-bubble:nth-child(1) { width: 120px; height: 120px; top: 10%; left: 5%; animation-delay: 0s; }
+    .cheese-bubble:nth-child(2) { width: 80px; height: 80px; top: 60%; left: 80%; animation-delay: 1.5s; }
+    .cheese-bubble:nth-child(3) { width: 150px; height: 150px; top: 40%; left: -5%; animation-delay: 3s; }
+    .cheese-bubble:nth-child(4) { width: 100px; height: 100px; top: 75%; left: 50%; animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(-25px); opacity: 1; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #fffef5;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 8px 35px rgba(255, 213, 79, 0.3);
+      animation: fadeIn 1s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      background: url('https://cdn.pixabay.com/photo/2020/06/23/08/23/dim-sum-5331078_1280.jpg') center/cover no-repeat;
+      height: 170px;
+      position: relative;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.25);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .hero-text {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      color: white;
+      z-index: 2;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .content {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-size: 30px;
+      color: #ffb300;
+      font-weight: 700;
+      margin-bottom: 5px;
+      text-shadow: 0 0 8px rgba(255, 193, 7, 0.2);
+    }
+
+    .content p {
+      font-size: 16px;
+      color: #555;
+      margin-top: 8px;
+    }
+
+    .product-image {
+      width: 38%;
+      border-radius: 20px;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(255, 179, 0, 0.2);
+      transition: transform 0.3s ease;
+      display: block;
+      margin-inline: auto;
+    }
+
+    .product-image:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+      color: #333;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-top: 25px;
+      box-shadow: 0 4px 10px rgba(251, 192, 45, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #fdd835, #f9a825);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(249, 168, 37, 0.4);
+    }
+
+    .order-section {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      background: #fff8e1;
+      border-radius: 20px;
+      border: 2px dashed #ffecb3;
+      width: fit-content;
+      margin-inline: auto;
+      text-align: center;
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .order-section p {
+      margin: 8px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .quantity button {
+      width: 35px;
+      height: 35px;
+      border: none;
+      background: #fbc02d;
+      color: white;
+      font-size: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quantity button:hover {
+      background: #f9a825;
+    }
+
+    .quantity span {
+      font-size: 18px;
+      font-weight: 600;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .total {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #111;
+      font-size: 18px;
+    }
+
+    .wa-btn {
+      display: inline-block;
+      background: #25d366;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .wa-btn:hover {
+      background: #1ebe57;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="marquee">
+    <span>★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★</span>
+  </div>
+
+  <a href="/" class="home-icon">
+    <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3z"/></svg>
+  </a>
+
+  <div class="cheese-bubble"></div>
+  <div class="cheese-bubble"></div>
+  <div class="cheese-bubble"></div>
+  <div class="cheese-bubble"></div>
+
+  <div class="container">
+    <div class="hero">
+      <div class="overlay"></div>
+      <div class="hero-text">
+        <h1>🧀 Happy Dimstore 🧀</h1>
+        <p>Melted Cheese Dimsum — soft, tasty, and really addicting!</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2> Melted Cheese Dimsum  </h2>
+      <p>The most delicious dimsum for those of you who like melted cheese! 
+Soft in the mouth, makes you immediately happy😋</p>
+
+      <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp" 
+           class="product-image">
+
+      <button class="btn" id="pesanBtn">🧀 Order now</button>
+
+      <div class="order-section" id="orderSection">
+        <p>Harga : <strong>Rp 13.000</strong></p>
+
+        <div class="quantity">
+          <button id="kurangBtn">-</button>
+          <span id="jumlah">1</span>
+          <button id="tambahBtn">+</button>
+        </div>
+
+        <p class="total">Total: <span id="totalHarga">Rp 13.000</span></p>
+
+        <div style="margin-top:15px; text-align:left;">
+          <label>Nama:</label><br>
+          <input type="text" id="nama" placeholder="Enter name" style="width:100%;padding:8px;margin:5px 0;border-radius:8px;border:1px solid #ccc;"><br>
+          <label>Alamat:</label><br>
+          <textarea id="alamat" placeholder="Enter address" style="width:100%;padding:8px;margin:5px 0;border-radius:8px;border:1px solid #ccc;"></textarea>
+        </div>
+
+        <button class="btn" id="saveBtn" style="background:#4caf50;color:white;margin-top:15px;">
+          💾 save order
+        </button>
+
+        <a href="#" id="waLink" class="wa-btn" target="_blank">💬 Order via WhatsApp</a>
+
+        <p style="margin-top: 10px; font-size: 14px; color: #000000; font-weight: 600; font-style: italic;">
+          *Payment can only be made via COD*
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    ©️ 2025 Happy Dimstore — Everyone's Favorite Melted Cheese Dimsum 🧀💛
+  </footer>
+
+  <script>
+    const pesanBtn = document.getElementById('pesanBtn');
+    const orderSection = document.getElementById('orderSection');
+    const tambahBtn = document.getElementById('tambahBtn');
+    const kurangBtn = document.getElementById('kurangBtn');
+    const jumlahEl = document.getElementById('jumlah');
+    const totalHargaEl = document.getElementById('totalHarga');
+    const waLink = document.getElementById('waLink');
+    const saveBtn = document.getElementById('saveBtn');
+
+    const harga = 13000;
+    let jumlah = 1;
+    let saved = false;
+
+    pesanBtn.addEventListener('click', () => {
+      orderSection.style.display = 
+        orderSection.style.display === 'block' ? 'none' : 'block';
+
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      updateWaLink();
+    });
+
+    tambahBtn.addEventListener('click', () => {
+      jumlah++;
+      updateTotal();
+      saved = false;
+    });
+
+    kurangBtn.addEventListener('click', () => {
+      if (jumlah > 1) jumlah--;
+      updateTotal();
+      saved = false;
+    });
+
+    function updateTotal() {
+      jumlahEl.textContent = jumlah;
+      totalHargaEl.textContent = 'Rp ' + (harga * jumlah).toLocaleString('id-ID');
+      updateWaLink();
+    }
+
+
+    saveBtn.addEventListener('click', () => {
+      const nama = document.getElementById('nama').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+
+      if(nama === "" || alamat === "") {
+        alert("Please fill in your Name and Address first! 📝");
+        return;
+      }
+
+      fetch("YOUR_GOOGLE_SCRIPT_WEBAPP_URL", {
+        method: "POST",
+        body: JSON.stringify({
+          menu: "Dimsum Keju Lumer",
+          jumlah: jumlah,
+          total: harga * jumlah,
+          nama: nama,
+          alamat: alamat,
+          waktu: new Date().toLocaleString("id-ID")
+        })
+      });
+
+      saved = true;
+      alert("Order saved successfully! ✔ Now you can Checkout.");
+    });
+
+    waLink.addEventListener('click', (e) => {
+      const nama = document.getElementById('nama').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+
+      if (!saved || nama === "" || alamat === "") {
+        e.preventDefault();
+        alert("Please fill in your Name & Address and click 'Save Order' first before Checkout📝");
+      }
+    });
+
+    function updateWaLink() {
+      const nomorWA = "6281904305192";
+      const nama = document.getElementById('nama').value.trim() || "[Nama belum diisi]";
+      const alamat = document.getElementById('alamat').value.trim() || "[Alamat belum diisi]";
+      const pesan = `Halo! Saya mau pesan Dimsum Keju Lumer sebanyak ${jumlah} porsi.\nTotal: Rp ${(harga * jumlah).toLocaleString('id-ID')}\nNama: ${nama}\nAlamat: ${alamat}`;
+      waLink.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+    }
+
+    updateWaLink();
+  </script>
+
+</body>
+</html>
