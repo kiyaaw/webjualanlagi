@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">  
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,25 +55,12 @@
     .home-icon svg {
       width: 2.5em;
       height: 2.5em;
-      fill: black; 
+      fill: black;
     }
 
     .home-icon:hover {
       transform: scale(1.12);
-    } 
-
-    .cheese-bubble {
-      position: absolute;
-      background: rgba(255, 223, 0, 0.3);
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
-      z-index: 0;
     }
-
-    .cheese-bubble:nth-child(1) { width: 120px; height: 120px; top: 10%; left: 5%; animation-delay: 0s; }
-    .cheese-bubble:nth-child(2) { width: 80px; height: 80px; top: 60%; left: 80%; animation-delay: 1.5s; }
-    .cheese-bubble:nth-child(3) { width: 150px; height: 150px; top: 40%; left: -5%; animation-delay: 3s; }
-    .cheese-bubble:nth-child(4) { width: 100px; height: 100px; top: 75%; left: 50%; animation-delay: 4s; }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); opacity: 0.6; }
@@ -270,6 +257,23 @@
       font-size: 14px;
       color: #777;
     }
+
+    input, textarea {
+      font-family: "Poppins", sans-serif;
+      padding: 10px;
+      border: 1px solid #ffd54f;
+      border-radius: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #ffb300;
+      box-shadow: 0 0 0 2px rgba(255, 179, 0, 0.2);
+    }
   </style>
 </head>
 
@@ -283,11 +287,6 @@
     <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3z"/></svg>
   </a>
 
-  <div class="cheese-bubble"></div>
-  <div class="cheese-bubble"></div>
-  <div class="cheese-bubble"></div>
-  <div class="cheese-bubble"></div>
-
   <div class="container">
     <div class="hero">
       <div class="overlay"></div>
@@ -298,7 +297,7 @@
     </div>
 
     <div class="content">
-      <h2> Melted Cheese Dimsum  </h2>
+      <h2>Melted Cheese Dimsum</h2>
       <p>The most delicious dimsum for those of you who like melted cheese! 
 Soft in the mouth, makes you immediately happy😋</p>
 
@@ -308,7 +307,7 @@ Soft in the mouth, makes you immediately happy😋</p>
       <button class="btn" id="pesanBtn">🧀 Order now</button>
 
       <div class="order-section" id="orderSection">
-        <p>Harga : <strong>Rp 13.000</strong></p>
+        <p>Price: <strong>Rp 13.000</strong></p>
 
         <div class="quantity">
           <button id="kurangBtn">-</button>
@@ -319,14 +318,14 @@ Soft in the mouth, makes you immediately happy😋</p>
         <p class="total">Total: <span id="totalHarga">Rp 13.000</span></p>
 
         <div style="margin-top:15px; text-align:left;">
-          <label>Nama:</label><br>
-          <input type="text" id="nama" placeholder="Enter name" style="width:100%;padding:8px;margin:5px 0;border-radius:8px;border:1px solid #ccc;"><br>
-          <label>Alamat:</label><br>
-          <textarea id="alamat" placeholder="Enter address" style="width:100%;padding:8px;margin:5px 0;border-radius:8px;border:1px solid #ccc;"></textarea>
+          <label>Name:</label><br>
+          <input type="text" id="nama" placeholder="Enter a name" value=><br>
+          <label>Address:</label><br>
+          <textarea id="alamat" placeholder="Enter address" rows="3"></textarea>
         </div>
 
         <button class="btn" id="saveBtn" style="background:#4caf50;color:white;margin-top:15px;">
-          💾 save order
+          💾Save Order
         </button>
 
         <a href="#" id="waLink" class="wa-btn" target="_blank">💬 Order via WhatsApp</a>
@@ -351,17 +350,20 @@ Soft in the mouth, makes you immediately happy😋</p>
     const totalHargaEl = document.getElementById('totalHarga');
     const waLink = document.getElementById('waLink');
     const saveBtn = document.getElementById('saveBtn');
+    const namaInput = document.getElementById('nama');
+    const alamatInput = document.getElementById('alamat');
 
     const harga = 13000;
     let jumlah = 1;
     let saved = false;
 
-    pesanBtn.addEventListener('click', () => {
-      orderSection.style.display = 
-        orderSection.style.display === 'block' ? 'none' : 'block';
+    updateWaLink();
 
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-      updateWaLink();
+    pesanBtn.addEventListener('click', () => {
+      orderSection.style.display = orderSection.style.display === 'block' ? 'none' : 'block';
+      if (orderSection.style.display === 'block') {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
     });
 
     tambahBtn.addEventListener('click', () => {
@@ -371,9 +373,11 @@ Soft in the mouth, makes you immediately happy😋</p>
     });
 
     kurangBtn.addEventListener('click', () => {
-      if (jumlah > 1) jumlah--;
-      updateTotal();
-      saved = false;
+      if (jumlah > 1) {
+        jumlah--;
+        updateTotal();
+        saved = false;
+      }
     });
 
     function updateTotal() {
@@ -382,52 +386,63 @@ Soft in the mouth, makes you immediately happy😋</p>
       updateWaLink();
     }
 
-
     saveBtn.addEventListener('click', () => {
-      const nama = document.getElementById('nama').value.trim();
-      const alamat = document.getElementById('alamat').value.trim();
+      const nama = namaInput.value.trim();
+      const alamat = alamatInput.value.trim();
 
-      if(nama === "" || alamat === "") {
+      if (!nama || !alamat) {
         alert("Please fill in your Name and Address first! 📝");
         return;
       }
 
-      fetch("YOUR_GOOGLE_SCRIPT_WEBAPP_URL", {
-        method: "POST",
-        body: JSON.stringify({
-          menu: "Dimsum Keju Lumer",
-          jumlah: jumlah,
-          total: harga * jumlah,
-          nama: nama,
-          alamat: alamat,
-          waktu: new Date().toLocaleString("id-ID")
-        })
-      });
+      const googleScriptUrl = "YOUR_GOOGLE_SCRIPT_WEBAPP_URL";
+      if (googleScriptUrl !== "YOUR_GOOGLE_SCRIPT_WEBAPP_URL") {
+        fetch(googleScriptUrl, {
+          method: "POST",
+          body: JSON.stringify({
+            menu: "Dimsum Keju Lumer",
+            jumlah: jumlah,
+            total: harga * jumlah,
+            nama: nama,
+            alamat: alamat,
+            waktu: new Date().toLocaleString("id-ID")
+          })
+        });
+      }
 
       saved = true;
-      alert("Order saved successfully! ✔ Now you can Checkout.");
-    });
-
-    waLink.addEventListener('click', (e) => {
-      const nama = document.getElementById('nama').value.trim();
-      const alamat = document.getElementById('alamat').value.trim();
-
-      if (!saved || nama === "" || alamat === "") {
-        e.preventDefault();
-        alert("Please fill in your Name & Address and click 'Save Order' first before Checkout📝");
-      }
+      alert("Order saved successfully! ✔ Now you can check out.");
+      updateWaLink();
     });
 
     function updateWaLink() {
-      const nomorWA = "6281904305192";
-      const nama = document.getElementById('nama').value.trim() || "[Nama belum diisi]";
-      const alamat = document.getElementById('alamat').value.trim() || "[Alamat belum diisi]";
-      const pesan = `Halo! Saya mau pesan Dimsum Keju Lumer sebanyak ${jumlah} porsi.\nTotal: Rp ${(harga * jumlah).toLocaleString('id-ID')}\nNama: ${nama}\nAlamat: ${alamat}`;
+      const nomorWA = "6283879736645";
+      const nama = namaInput.value.trim();
+      const alamat = alamatInput.value.trim();
+      
+      const namaDisplay = nama || "[Nama belum diisi]";
+      const alamatDisplay = alamat || "[Alamat belum diisi]";
+      
+      const pesan = `Halo! Saya mau pesan Dimsum Keju Lumer sebanyak ${jumlah} porsi.
+Total: Rp ${(harga * jumlah).toLocaleString('id-ID')}
+Nama: ${namaDisplay}
+Alamat: ${alamatDisplay}`;
+      
       waLink.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
     }
 
-    updateWaLink();
-  </script>
+    namaInput.addEventListener('input', updateWaLink);
+    alamatInput.addEventListener('input', updateWaLink);
 
+    waLink.addEventListener('click', (e) => {
+      const nama = namaInput.value.trim();
+      const alamat = alamatInput.value.trim();
+
+      if (!nama || !alamat) {
+        e.preventDefault();
+        alert("Please fill in your Name and Address first before checkout!📝");
+      }}
+    );
+  </script>
 </body>
 </html>
