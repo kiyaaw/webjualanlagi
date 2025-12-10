@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+    <html lang="id">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Dimstore - Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #fffde7, #fff59d, #fff8e1);
+        margin: 0;
+        padding: 0;
+        color: #333;
+        position: relative;
+        overflow-x: hidden;
+        }
+
+        .marquee {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        box-sizing: border-box;
+        background: black;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 10px 0;
+        letter-spacing: 2px;
+        position: relative;
+        }
+
+        .marquee span {
+        display: inline-block;
+        animation: move 20s linear infinite;
+        }
+
+        @keyframes move {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
+        }
+
+        .home-icon {
+        position: absolute;
+        top: 70px;
+        left: 12px;
+        font-size: 1.8em;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 30px;
+        transition: 0.2s ease;
+        }
+
+        .home-icon svg {
+        width: 2.5em;
+        height: 2.5em;
+        fill: black;
+        }
+
+        .home-icon:hover {
+        transform: scale(1.12);
+        }
+
+        .cheese-bubble {
+        position: absolute;
+        background: rgba(255, 223, 0, 0.3);
+        border-radius: 50%;
+        animation: float 6s ease-inout infinite;
+        z-index: 0;
+        }
+
+        .cheese-bubble:nth-child(1) { width: 120px; height: 120px; top: 10%; left: 5%; animation-delay: 0s; }
+        .cheese-bubble:nth-child(2) { width: 80px; height: 80px; top: 60%; left: 80%; animation-delay: 1.5s; }
+        .cheese-bubble:nth-child(3) { width: 150px; height: 150px; top: 40%; left: -5%; animation-delay: 3s; }
+        .cheese-bubble:nth-child(4) { width: 100px; height: 100px; top: 75%; left: 50%; animation-delay: 4s; }
+
+        @keyframes float {
+        0%, 100% { transform: translateY(0); opacity: 0.6; }
+        50% { transform: translateY(-25px); opacity: 1; }
+        }
+
+        .container {
+        max-width: 900px;
+        margin: 60px auto;
+        background: #fffef5;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 8px 35px rgba(255, 213, 79, 0.3);
+        animation: fadeIn 1s ease;
+        position: relative;
+        z-index: 1;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+        background: url('https://cdn.pixabay.com/photo/2020/06/23/08/23/dim-sum-5331078_1280.jpg') center/cover no-repeat;
+        height: 170px;
+        position: relative;
+        }
+
+        .overlay {
+        background: rgba(0, 0, 0, 0.25);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        }
+
+        .hero-text {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        color: white;
+        z-index: 2;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero-text h1 {
+        font-size: 42px;
+        margin: 0;
+        font-weight: 700;
+        }
+
+        .hero-text p {
+        font-size: 18px;
+        margin-top: 8px;
+        font-weight: 500;
+        }
+
+        .content {
+        padding: 30px;
+        text-align: center;
+        }
+
+        .content h2 {
+        font-size: 30px;
+        color: #ffb300;
+        font-weight: 700;
+        margin-bottom: 5px;
+        text-shadow: 0 0 8px rgba(255, 193, 7, 0.2);
+        }
+
+        .content p {
+        font-size: 16px;
+        color: #555;
+        margin-top: 8px;
+        }
+
+        .product-image {
+        width: 38%;
+        border-radius: 20px;
+        margin-top: 20px;
+        box-shadow: 0 5px 15px rgba(255, 179, 0, 0.2);
+        transition: transform 0.3s ease;
+        display: block;
+        margin-inline: auto;
+        }
+
+        .product-image:hover {
+        transform: scale(1.05) rotate(-1deg);
+        }
+
+        .btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+        color: #333;
+        padding: 12px 30px;
+        border-radius: 12px;
+        font-weight: 600;
+        margin-top: 25px;
+        box-shadow: 0 4px 10px rgba(251, 192, 45, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        }
+
+        .btn:hover {
+        background: linear-gradient(135deg, #fdd835, #f9a825);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(249, 168, 37, 0.4);
+        }
+
+        .btn-secondary {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        }
+
+        .btn-secondary:hover {
+        background: linear-gradient(135deg, #388e3c, #1b5e20);
+        }
+
+        .btn-danger {
+        background: linear-gradient(135deg, #f44336, #d32f2f);
+        color: white;
+        }
+
+        .btn-danger:hover {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        }
+
+        .order-section {
+        display: none;
+        margin-top: 25px;
+        padding: 25px;
+        background: #fff8e1;
+        border-radius: 20px;
+        border: 2px dashed #ffecb3;
+        width: fit-content;
+        margin-inline: auto;
+        text-align: center;
+        animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+        }
+
+        .order-section p {
+        margin: 8px 0;
+        font-size: 16px;
+        color: #333;
+        }
+
+        .quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+        }
+
+        .quantity button {
+        width: 35px;
+        height: 35px;
+        border: none;
+        background: #fbc02d;
+        color: white;
+        font-size: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+        }
+
+        .quantity button:hover {
+        background: #f9a825;
+        }
+
+        .quantity span {
+        font-size: 18px;
+        font-weight: 600;
+        min-width: 30px;
+        text-align: center;
+        }
+
+        .total {
+        margin-top: 15px;
+        font-weight: bold;
+        color: #111;
+        font-size: 18px;
+        }
+
+        .wa-btn {
+        display: inline-block;
+        background: #25d366;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: 0.3s;
+        }
+
+        .wa-btn:hover {
+        background: #1ebe57;
+        }
+
+        footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+        color: #777;
+        }
+
+        input, textarea, select {
+        font-family: "Poppins", sans-serif;
+        padding: 10px;
+        border: 1px solid #ffd54f;
+        border-radius: 8px;
+        margin: 5px 0;
+        width: 100%;
+        box-sizing: border-box;
+        transition: border 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #ffb300;
+        box-shadow: 0 0 0 2px rgba(255, 179, 0, 0.2);
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+        margin-top: 30px;
+        padding: 25px;
+        background: #f5f5f5;
+        border-radius: 20px;
+        border: 2px solid #ffd54f;
+        text-align: left;
+        }
+
+        .admin-panel h3 {
+        color: #ff6f00;
+        margin-bottom: 20px;
+        text-align: center;
+        }
+
+        .form-group {
+        margin-bottom: 15px;
+        }
+
+        .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #555;
+        }
+
+        .menu-list {
+        margin-top: 20px;
+        border-top: 2px dashed #ffd54f;
+        padding-top: 20px;
+        }
+
+        .menu-item {
+        background: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border-left: 4px solid #ffb300;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s;
+        }
+
+        .menu-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .menu-item.active {
+        border-left: 4px solid #ff6f00;
+        background: #fff8e1;
+        }
+
+        .menu-item-info {
+        flex: 1;
+        }
+
+        .menu-item-name {
+        font-weight: 700;
+        color: #333;
+        font-size: 18px;
+        }
+
+        .menu-item-price {
+        color: #ff6f00;
+        font-weight: 600;
+        }
+
+        .menu-item-actions {
+        display: flex;
+        gap: 10px;
+        }
+
+        .action-btn {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        }
+
+        .edit-btn {
+        background: #2196f3;
+        color: white;
+        }
+
+        .edit-btn:hover {
+        background: #1976d2;
+        }
+
+        .delete-btn {
+        background: #f44336;
+        color: white;
+        }
+
+        .delete-btn:hover {
+        background: #d32f2f;
+        }
+
+        .tab-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        }
+
+        .tab {
+        padding: 10px 30px;
+        background: #ffecb3;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        }
+
+        .tab.active {
+        background: #ffb300;
+        color: white;
+        }
+
+        .tab-content {
+        display: none;
+        }
+
+        .tab-content.active {
+        display: block;
+        }
+
+        /* Menu Selector */
+        .menu-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+        justify-content: center;
+        }
+
+        .menu-option {
+        padding: 10px 20px;
+        background: #ffecb3;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        }
+
+        .menu-option:hover {
+        background: #ffd54f;
+        transform: translateY(-2px);
+        }
+
+        .menu-option.active {
+        background: #ffb300;
+        color: white;
+        border-color: #ff6f00;
+        }
+    </style>
+    </head>
+
+    <body>
+
+    <div class="marquee">
+        <span>★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★</span>
+    </div>
+
+    <a href="./admin.html" class="home-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3z"/></svg>
+    </a>
+
+    <div class="cheese-bubble"></div>
+    <div class="cheese-bubble"></div>
+    <div class="cheese-bubble"></div>
+    <div class="cheese-bubble"></div>
+
+    <div class="container">
+        <div class="hero">
+        <div class="overlay"></div>
+        <div class="hero-text">
+            <h1>🧀 Happy Dimstore 🧀</h1>
+            <p>Melted Cheese Dimsum — soft, tasty, and really addicting!</p>
+        </div>
+        </div>
+
+        <div class="content">
+        <!-- Tabs -->
+        <div class="tab-container">
+            <div class="tab active" onclick="switchTab('order')">🛒 Pesan Menu</div>
+            <div class="tab" onclick="switchTab('admin')">⚙️ Kelola Menu</div>
+        </div>
+
+        <!-- Order Tab -->
+        <div id="orderTab" class="tab-content active">
+            <!-- Menu Selector -->
+            <div class="menu-selector" id="menuSelector">
+            <!-- Menu options will be generated here -->
+            </div>
+
+            <h2 id="menuTitle">Melted Cheese Dimsum</h2>
+            <p id="menuDescription">The most delicious dimsum for those of you who like melted cheese! Soft in the mouth, makes you immediately happy😋</p>
+
+            <img id="menuImage" src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp" 
+                class="product-image">
+
+            <button class="btn" id="pesanBtn">🧀 Order now</button>
+
+            <div class="order-section" id="orderSection">
+            <p>Harga: <strong id="menuPrice">Rp 13.000</strong></p>
+
+            <div class="quantity">
+                <button id="kurangBtn">-</button>
+                <span id="jumlah">1</span>
+                <button id="tambahBtn">+</button>
+            </div>
+
+            <p class="total">Total: <span id="totalHarga">Rp 13.000</span></p>
+
+            <div style="margin-top:15px; text-align:left;">
+                <label>Nama:</label><br>
+                <input type="text" id="nama" placeholder="Masukkan nama" value="naila"><br>
+                <label>Alamat:</label><br>
+                <textarea id="alamat" placeholder="Masukkan alamat" rows="3">perum griya citra persada</textarea>
+            </div>
+
+            <button class="btn" id="saveBtn" style="background:#4caf50;color:white;margin-top:15px;">
+                💾 Simpan Pesanan
+            </button>
+
+            <a href="#" id="waLink" class="wa-btn" target="_blank">💬 Order via WhatsApp</a>
+
+            <p style="margin-top: 10px; font-size: 14px; color: #000000; font-weight: 600; font-style: italic;">
+                *Pembayaran hanya bisa via COD*
+            </p>
+            </div>
+        </div>
+
+        <!-- Admin Tab -->
+        <div id="adminTab" class="tab-content">
+            <div class="admin-panel">
+            <h3>⚙️ Kelola Menu Makanan</h3>
+            
+            <div class="form-group">
+                <label for="editMenuName">Nama Menu:</label>
+                <input type="text" id="editMenuName" placeholder="Masukkan nama menu" value="Melted Cheese Dimsum">
+            </div>
+
+            <div class="form-group">
+                <label for="editMenuDescription">Deskripsi:</label>
+                <textarea id="editMenuDescription" rows="3" placeholder="Masukkan deskripsi menu">The most delicious dimsum for those of you who like melted cheese! Soft in the mouth, makes you immediately happy😋</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="editMenuPrice">Harga (Rp):</label>
+                <input type="number" id="editMenuPrice" placeholder="Masukkan harga" value="13000">
+            </div>
+
+            <div class="form-group">
+                <label for="editMenuImage">URL Gambar:</label>
+                <input type="text" id="editMenuImage" placeholder="Masukkan URL gambar" value="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp">
+            </div>
+
+            <div class="form-group">
+                <label for="editMenuCategory">Kategori:</label>
+                <select id="editMenuCategory">
+                <option value="dimsum">Dimsum</option>
+                <option value="makanan">Makanan</option>
+                <option value="minuman">Minuman</option>
+                <option value="snack">Snack</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="saveMenu()">💾 Simpan Menu</button>
+                <button class="btn" onclick="addNewMenu()">➕ Tambah Menu Baru</button>
+                <button class="btn btn-danger" onclick="deleteCurrentMenu()">🗑️ Hapus Menu Ini</button>
+            </div>
+
+            <div class="menu-list" id="menuList">
+                <h4>Daftar Menu Tersedia:</h4>
+                <!-- Menu items will be generated here -->
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <footer>
+        ©️ 2025 Happy Dimstore — Everyone's Favorite Melted Cheese Dimsum 🧀💛
+    </footer>
+
+    <script>
+        // DOM Elements
+        const pesanBtn = document.getElementById('pesanBtn');
+        const orderSection = document.getElementById('orderSection');
+        const tambahBtn = document.getElementById('tambahBtn');
+        const kurangBtn = document.getElementById('kurangBtn');
+        const jumlahEl = document.getElementById('jumlah');
+        const totalHargaEl = document.getElementById('totalHarga');
+        const waLink = document.getElementById('waLink');
+        const saveBtn = document.getElementById('saveBtn');
+        const namaInput = document.getElementById('nama');
+        const alamatInput = document.getElementById('alamat');
+        const menuSelector = document.getElementById('menuSelector');
+
+        // Menu Elements
+        const menuTitle = document.getElementById('menuTitle');
+        const menuDescription = document.getElementById('menuDescription');
+        const menuPrice = document.getElementById('menuPrice');
+        const menuImage = document.getElementById('menuImage');
+
+        // Edit Form Elements
+        const editMenuName = document.getElementById('editMenuName');
+        const editMenuDescription = document.getElementById('editMenuDescription');
+        const editMenuPrice = document.getElementById('editMenuPrice');
+        const editMenuImage = document.getElementById('editMenuImage');
+        const editMenuCategory = document.getElementById('editMenuCategory');
+        const menuList = document.getElementById('menuList');
+
+        // Default Main Menu (Dimsum) - TIDAK BISA DIHAPUS
+        const DEFAULT_MAIN_MENU = {
+        id: 1,
+        name: "Melted Cheese Dimsum",
+        description: "The most delicious dimsum for those of you who like melted cheese! Soft in the mouth, makes you immediately happy😋",
+        price: 13000,
+        image: "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp",
+        category: "dimsum",
+        isMainMenu: true // Flag untuk menu utama
+        };
+
+        // Initialize menus
+        let menus = JSON.parse(localStorage.getItem('happyDimstoreMenus')) || [DEFAULT_MAIN_MENU];
+        
+        // Ensure default menu exists and has the flag
+        const defaultMenuExists = menus.find(menu => menu.id === 1);
+        if (!defaultMenuExists) {
+        menus.unshift(DEFAULT_MAIN_MENU);
+        } else {
+        // Ensure the flag is set for default menu
+        menus = menus.map(menu => {
+            if (menu.id === 1) {
+            return { ...menu, isMainMenu: true };
+            }
+            return menu;
+        });
+        }
+        
+        let currentMenu = menus.find(menu => menu.id === 1) || menus[0];
+        let currentMenuId = 1;
+        let jumlah = 1;
+        let saved = false;
+
+        // Initialize
+        updateWaLink();
+        loadMenus();
+        loadMenuSelector();
+        updateMenuDisplay();
+
+        // Event Listeners
+        pesanBtn.addEventListener('click', () => {
+        orderSection.style.display = orderSection.style.display === 'block' ? 'none' : 'block';
+        if (orderSection.style.display === 'block') {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        });
+
+        tambahBtn.addEventListener('click', () => {
+        jumlah++;
+        updateTotal();
+        saved = false;
+        });
+
+        kurangBtn.addEventListener('click', () => {
+        if (jumlah > 1) {
+            jumlah--;
+            updateTotal();
+            saved = false;
+        }
+        });
+
+        // Update total price
+        function updateTotal() {
+        jumlahEl.textContent = jumlah;
+        totalHargaEl.textContent = 'Rp ' + (currentMenu.price * jumlah).toLocaleString('id-ID');
+        updateWaLink();
+        }
+
+        // Save order
+        saveBtn.addEventListener('click', () => {
+        const nama = namaInput.value.trim();
+        const alamat = alamatInput.value.trim();
+
+        if (!nama || !alamat) {
+            alert("Harap isi Nama dan Alamat terlebih dahulu! 📝");
+            return;
+        }
+
+        saved = true;
+        alert("Pesanan berhasil disimpan! ✔ Sekarang bisa checkout.");
+        updateWaLink();
+        });
+
+        // Update WhatsApp link function
+        function updateWaLink() {
+        const nomorWA = "6283879736645";
+        
+        const nama = namaInput.value.trim();
+        const alamat = alamatInput.value.trim();
+        
+        const namaDisplay = nama || "[Nama belum diisi]";
+        const alamatDisplay = alamat || "[Alamat belum diisi]";
+        
+        const pesan = `Halo! Saya mau pesan ${currentMenu.name} sebanyak ${jumlah} porsi.
+    Total: Rp ${(currentMenu.price * jumlah).toLocaleString('id-ID')}
+    Nama: ${namaDisplay}
+    Alamat: ${alamatDisplay}`;
+        
+        waLink.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+        }
+
+        // Auto-update WhatsApp link when inputs change
+        namaInput.addEventListener('input', updateWaLink);
+        alamatInput.addEventListener('input', updateWaLink);
+
+        
+        waLink.addEventListener('click', (e) => {
+        const nama = namaInput.value.trim();
+        const alamat = alamatInput.value.trim();
+
+        if (!nama || !alamat) {
+            e.preventDefault();
+            alert("Harap isi Nama dan Alamat terlebih dahulu sebelum checkout! 📝");
+        } else if (!saved) {
+            const confirmSave = confirm("Anda belum menyimpan pesanan. Lanjutkan checkout tanpa menyimpan?");
+            if (!confirmSave) {
+            e.preventDefault();
+            }
+        }
+        });
+        function switchTab(tabName) {
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+
+        if (tabName === 'order') {
+            document.querySelector('.tab:nth-child(1)').classList.add('active');
+            document.getElementById('orderTab').classList.add('active');
+        } else {
+            document.querySelector('.tab:nth-child(2)').classList.add('active');
+            document.getElementById('adminTab').classList.add('active');
+        }
+        }
+        function updateMenuDisplay() {
+        menuTitle.textContent = currentMenu.name;
+        menuDescription.textContent = currentMenu.description;
+        menuPrice.textContent = 'Rp ' + currentMenu.price.toLocaleString('id-ID');
+        menuImage.src = currentMenu.image;
+
+        editMenuName.value = currentMenu.name;
+        editMenuDescription.value = currentMenu.description;
+        editMenuPrice.value = currentMenu.price;
+        editMenuImage.value = currentMenu.image;
+        editMenuCategory.value = currentMenu.category;
+        updateTotal();
+        loadMenuSelector();
+        }
+        function loadMenuSelector() {
+        menuSelector.innerHTML = '';
+        
+        menus.forEach(menu => {
+            const menuOption = document.createElement('div');
+            menuOption.className = `menu-option ${menu.id === currentMenuId ? 'active' : ''}`;
+            menuOption.textContent = menu.name;
+            menuOption.onclick = () => selectMenu(menu.id);
+            menuSelector.appendChild(menuOption);
+        });
+        }
+        function selectMenu(id) {
+        const menu = menus.find(m => m.id === id);
+        if (menu) {
+            currentMenu = menu;
+            currentMenuId = id;
+            updateMenuDisplay();
+            loadMenus(); // Update highlight in admin list
+        }
+        }
+        function loadMenus() {
+        menuList.innerHTML = '<h4>Daftar Menu Tersedia:</h4>';
+        
+        if (menus.length === 0) {
+            menuList.innerHTML += '<p>Tidak ada menu tersedia. Tambahkan menu baru!</p>';
+            return;
+        }
+        
+        menus.forEach(menu => {
+            const menuItem = document.createElement('div');
+            menuItem.className = `menu-item ${menu.id === currentMenuId ? 'active' : ''}`;
+            menuItem.innerHTML = `
+            <div class="menu-item-info">
+                <div class="menu-item-name">${menu.name} ${menu.isMainMenu ? '🌟' : ''}</div>
+                <div class="menu-item-price">Rp ${menu.price.toLocaleString('id-ID')}</div>
+                <div style="font-size: 12px; color: #666;">${menu.category}</div>
+            </div>
+            <div class="menu-item-actions">
+                <button class="action-btn edit-btn" onclick="editMenu(${menu.id})">Edit</button>
+                ${!menu.isMainMenu ? `<button class="action-btn delete-btn" onclick="deleteMenu(${menu.id})">Hapus</button>` : ''}
+            </div>
+            `;
+            menuItem.onclick = () => editMenu(menu.id);
+            menuList.appendChild(menuItem);
+        });
+        }
+        function saveMenu() {
+        if (!editMenuName.value.trim()) {
+            alert("Nama menu tidak boleh kosong!");
+            return;
+        }
+        
+        if (!editMenuPrice.value || editMenuPrice.value <= 0) {
+            alert("Harga harus lebih dari 0!");
+            return;
+        }
+        const isMainMenu = currentMenuId === 1;
+        currentMenu = {
+            id: currentMenuId,
+            name: editMenuName.value.trim(),
+            description: editMenuDescription.value.trim(),
+            price: parseInt(editMenuPrice.value),
+            image: editMenuImage.value.trim(),
+            category: editMenuCategory.value,
+            isMainMenu: isMainMenu
+        };
+        const index = menus.findIndex(m => m.id === currentMenuId);
+        if (index !== -1) {
+            menus[index] = currentMenu;
+        } else {
+            menus.push(currentMenu);
+        }
+        localStorage.setItem('happyDimstoreMenus', JSON.stringify(menus));
+        updateMenuDisplay();
+        loadMenus();
+        
+        alert("Menu berhasil disimpan! ✅");
+        }
+        function addNewMenu() {
+        const newId = menus.length > 0 ? Math.max(...menus.map(m => m.id)) + 1 : 2;
+        editMenuName.value = "";
+        editMenuDescription.value = "";
+        editMenuPrice.value = "";
+        editMenuImage.value = "";
+        editMenuCategory.value = "dimsum";
+        
+        currentMenuId = newId;
+        currentMenu = {
+            id: newId,
+            name: "",
+            description: "",
+            price: 0,
+            image: "",
+            category: "dimsum",
+            isMainMenu: false
+        };
+        
+        alert("Form telah direset. Silakan isi data menu baru!");
+        }
+        function editMenu(id) {
+        const menu = menus.find(m => m.id === id);
+        if (menu) {
+            currentMenu = menu;
+            currentMenuId = id;
+            updateMenuDisplay();
+            switchTab('admin');
+        }
+        }
+        function deleteMenu(id) {
+        const menuToDelete = menus.find(m => m.id === id);
+        if (menuToDelete && menuToDelete.isMainMenu) {
+            alert("Menu utama (Dimsum) tidak bisa dihapus! 🌟");
+            return;
+        }
+
+        if (menus.length <= 1) {
+            alert("Tidak bisa menghapus menu terakhir! Minimal harus ada 1 menu.");
+            return;
+        }
+
+        if (confirm(`Apakah Anda yakin ingin menghapus menu ini?`)) {
+            menus = menus.filter(m => m.id !== id);
+            if (currentMenuId === id) {
+            currentMenu = menus.find(m => m.id === 1) || menus[0];
+            currentMenuId = currentMenu.id;
+            updateMenuDisplay();
+            }
+            localStorage.setItem('happyDimstoreMenus', JSON.stringify(menus));
+            loadMenus();
+            loadMenuSelector();
+            
+            alert("Menu berhasil dihapus! ✅");
+        }
+        }
+        function deleteCurrentMenu() {
+        if (currentMenuId === 1) {
+            alert("Menu utama (Dimsum) tidak bisa dihapus! 🌟\n\nMenu utama selalu menjadi halaman pertama yang dilihat customer.");
+            return;
+        }
+        
+        deleteMenu(currentMenuId);
+        }
+        function resetToMainMenu() {
+        const mainMenu = menus.find(m => m.id === 1);
+        if (mainMenu) {
+            currentMenu = mainMenu;
+            currentMenuId = 1;
+            updateMenuDisplay();
+            switchTab('order');
+        }
+        }
+        document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'm') {
+            e.preventDefault();
+            resetToMainMenu();
+            alert("Kembali ke menu utama (Dimsum) 🌟");
+        }
+        });
+    </script>
+    </body>
+    </html>
