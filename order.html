@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Dimstore</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fffde7, #fff59d, #fff8e1);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .marquee {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      background: black;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 10px 0;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    .marquee span {
+      display: inline-block;
+      animation: move 20s linear infinite;
+    }
+
+    @keyframes move {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .home-icon {
+      position: absolute;
+      top: 70px;
+      left: 12px;
+      font-size: 1.8em;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 30px;
+      transition: 0.2s ease;
+    }
+
+    .home-icon svg {
+      width: 2.5em;
+      height: 2.5em;
+      fill: black;
+    }
+
+    .home-icon:hover {
+      transform: scale(1.12);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(-25px); opacity: 1; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #fffef5;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 8px 35px rgba(255, 213, 79, 0.3);
+      animation: fadeIn 1s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      background: url('https://cdn.pixabay.com/photo/2020/06/23/08/23/dim-sum-5331078_1280.jpg') center/cover no-repeat;
+      height: 170px;
+      position: relative;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.25);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .hero-text {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      color: white;
+      z-index: 2;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .content {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-size: 30px;
+      color: #ffb300;
+      font-weight: 700;
+      margin-bottom: 5px;
+      text-shadow: 0 0 8px rgba(255, 193, 7, 0.2);
+    }
+
+    .content p {
+      font-size: 16px;
+      color: #555;
+      margin-top: 8px;
+    }
+
+    .product-image {
+      width: 38%;
+      border-radius: 20px;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(255, 179, 0, 0.2);
+      transition: transform 0.3s ease;
+      display: block;
+      margin-inline: auto;
+    }
+
+    .product-image:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+      color: #333;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-top: 25px;
+      box-shadow: 0 4px 10px rgba(251, 192, 45, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #fdd835, #f9a825);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(249, 168, 37, 0.4);
+    }
+
+    .order-section {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      background: #fff8e1;
+      border-radius: 20px;
+      border: 2px dashed #ffecb3;
+      width: fit-content;
+      margin-inline: auto;
+      text-align: center;
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .order-section p {
+      margin: 8px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .quantity button {
+      width: 35px;
+      height: 35px;
+      border: none;
+      background: #fbc02d;
+      color: white;
+      font-size: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quantity button:hover {
+      background: #f9a825;
+    }
+
+    .quantity span {
+      font-size: 18px;
+      font-weight: 600;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .total {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #111;
+      font-size: 18px;
+    }
+
+    .wa-btn {
+      display: inline-block;
+      background: #25d366;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .wa-btn:hover {
+      background: #1ebe57;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+
+    input, textarea {
+      font-family: "Poppins", sans-serif;
+      padding: 10px;
+      border: 1px solid #ffd54f;
+      border-radius: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #ffb300;
+      box-shadow: 0 0 0 2px rgba(255, 179, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="marquee">
+    <span>★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★</span>
+  </div>
+
+  <a href="./beranda.html" class="home-icon">
+    <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3z"/></svg>
+  </a>
+
+  <div class="container">
+    <div class="hero">
+      <div class="overlay"></div>
+      <div class="hero-text">
+        <h1 id="storeTitle">🧀 Happy Dimstore 🧀</h1>
+        <p id="storeSlogan">Dimsum keju leleh lembut, lezat, dan benar-benar bikin ketagihan!</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Menu Selector -->
+      <div class="menu-selector" id="menuSelector">
+        <!-- Menu akan di-generate oleh JavaScript -->
+      </div>
+
+      <h2 id="menuTitle">Melted Cheese Dimsum</h2>
+      <p id="menuDescription">Dimsum paling lezat untuk Anda yang menyukai keju leleh! Lembut di mulut, langsung membuat Anda bahagia.😋</p>
+
+      <img id="menuImage" src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp" 
+           class="product-image">
+
+      <button class="btn" id="pesanBtn">🧀 Pesan Sekarang</button>
+
+      <div class="order-section" id="orderSection">
+        <p>Harga: <strong id="menuPrice">Rp 13.000</strong></p>
+
+        <div class="quantity">
+          <button id="kurangBtn">-</button>
+          <span id="jumlah">1</span>
+          <button id="tambahBtn">+</button>
+        </div>
+
+        <p class="total">Total: <span id="totalHarga">Rp 13.000</span></p>
+
+        <div style="margin-top:15px; text-align:left;">
+          <label>Nama:</label><br>
+          <input type="text" id="nama" placeholder="Enter a name" value=""><br>
+          <label>Alamat:</label><br>
+          <textarea id="alamat" placeholder="Enter address" rows="3"></textarea>
+        </div>
+
+        <button class="btn" id="saveBtn" style="background:#4caf50;color:white;margin-top:15px;">
+          💾 Simpan Order
+        </button>
+
+        <a href="#" id="waLink" class="wa-btn" target="_blank">💬 Order via WhatsApp</a>
+
+        <p style="margin-top: 10px; font-size: 14px; color: #000000; font-weight: 600; font-style: italic;">
+          *Pembayaran hanya bisa melalui COD*
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Dimsum Keju Leleh Favorit Semua Orang 🧀💛
+  </footer>
+
+  <script>
+    // ========== KONFIGURASI UTAMA ==========
+    const MENU_STORAGE_KEY = 'happyDimstoreMenus';
+    const DEFAULT_MAIN_MENU = {
+      id: 1,
+      name: "Dimsum Keju Leleh",
+      description: "Dimsum paling lezat untuk Anda yang menyukai keju leleh! Lembut di mulut, langsung membuat Anda bahagia.😋",
+      price: 13000,
+      image: "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/4bc69623cc2e4e32a176319867d7349d~tplv-aphluv4xwc-resize-webp:800:800.webp",
+      category: "dimsum"
+    };
+
+    // ========== ELEMEN DOM ==========
+    const pesanBtn = document.getElementById('pesanBtn');
+    const orderSection = document.getElementById('orderSection');
+    const tambahBtn = document.getElementById('tambahBtn');
+    const kurangBtn = document.getElementById('kurangBtn');
+    const jumlahEl = document.getElementById('jumlah');
+    const totalHargaEl = document.getElementById('totalHarga');
+    const waLink = document.getElementById('waLink');
+    const saveBtn = document.getElementById('saveBtn');
+    const namaInput = document.getElementById('nama');
+    const alamatInput = document.getElementById('alamat');
+    const menuSelector = document.getElementById('menuSelector');
+    
+    // Elemen menu
+    const menuTitle = document.getElementById('menuTitle');
+    const menuDescription = document.getElementById('menuDescription');
+    const menuPrice = document.getElementById('menuPrice');
+    const menuImage = document.getElementById('menuImage');
+    const storeTitle = document.getElementById('storeTitle');
+    const storeSlogan = document.getElementById('storeSlogan');
+
+    // ========== STATE APLIKASI ==========
+    let menus = loadMenus();
+    let currentMenu = menus.find(menu => menu.id === 1) || menus[0];
+    let currentMenuId = currentMenu.id;
+    let jumlah = 1;
+    let saved = false;
+
+    // ========== INISIALISASI ==========
+    updateMenuDisplay();
+    loadMenuSelector();
+    updateWaLink();
+    startStorageListener();
+
+    // ========== EVENT LISTENERS ==========
+    pesanBtn.addEventListener('click', () => {
+      orderSection.style.display = orderSection.style.display === 'block' ? 'none' : 'block';
+      if (orderSection.style.display === 'block') {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+    });
+
+    tambahBtn.addEventListener('click', () => {
+      jumlah++;
+      updateTotal();
+      saved = false;
+    });
+
+    kurangBtn.addEventListener('click', () => {
+      if (jumlah > 1) {
+        jumlah--;
+        updateTotal();
+        saved = false;
+      }
+    });
+
+    saveBtn.addEventListener('click', () => {
+      const nama = namaInput.value.trim();
+      const alamat = alamatInput.value.trim();
+
+      if (!nama || !alamat) {
+        alert("Mohon isi Nama dan Alamat Anda terlebih dahulu! 📝");
+        return;
+      }
+
+      saved = true;
+      alert("Pesanan berhasil disimpan! ✔ Sekarang Anda bisa melakukan pembayaran.");
+      updateWaLink();
+    });
+
+    namaInput.addEventListener('input', updateWaLink);
+    alamatInput.addEventListener('input', updateWaLink);
+
+    waLink.addEventListener('click', (e) => {
+      const nama = namaInput.value.trim();
+      const alamat = alamatInput.value.trim();
+
+      if (!nama || !alamat) {
+        e.preventDefault();
+        alert("Mohon isi Nama dan Alamat Anda terlebih dahulu sebelum melakukan pembayaran! 📝");
+      } else if (!saved) {
+        const confirmSave = confirm("Anda belum menyimpan pesanan. Lanjutkan proses pembayaran tanpa menyimpan?");
+        if (!confirmSave) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // ========== FUNGSI UTAMA ==========
+    function loadMenus() {
+      const storedMenus = localStorage.getItem(MENU_STORAGE_KEY);
+      if (!storedMenus) {
+        // Simpan menu default jika belum ada
+        localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify([DEFAULT_MAIN_MENU]));
+        return [DEFAULT_MAIN_MENU];
+      }
+      
+      let parsedMenus = JSON.parse(storedMenus);
+      
+      // Pastikan selalu ada menu utama
+      if (!parsedMenus.find(menu => menu.id === 1)) {
+        parsedMenus.unshift(DEFAULT_MAIN_MENU);
+        localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(parsedMenus));
+      }
+      
+      return parsedMenus;
+    }
+
+    function updateMenuDisplay() {
+      menuTitle.textContent = currentMenu.name;
+      menuDescription.textContent = currentMenu.description;
+      menuPrice.textContent = 'Rp ' + currentMenu.price.toLocaleString('id-ID');
+      menuImage.src = currentMenu.image;
+      updateTotal();
+    }
+
+    function loadMenuSelector() {
+      menuSelector.innerHTML = '';
+      
+      menus.forEach(menu => {
+        const menuOption = document.createElement('div');
+        menuOption.className = `menu-option ${menu.id === currentMenuId ? 'active' : ''}`;
+        menuOption.textContent = menu.name;
+        menuOption.onclick = () => selectMenu(menu.id);
+        menuSelector.appendChild(menuOption);
+      });
+    }
+
+    function selectMenu(id) {
+      const menu = menus.find(m => m.id === id);
+      if (menu) {
+        currentMenu = menu;
+        currentMenuId = id;
+        jumlah = 1; // Reset quantity
+        updateMenuDisplay();
+        loadMenuSelector();
+      }
+    }
+
+    function updateTotal() {
+      jumlahEl.textContent = jumlah;
+      totalHargaEl.textContent = 'Rp ' + (currentMenu.price * jumlah).toLocaleString('id-ID');
+      updateWaLink();
+    }
+
+    function updateWaLink() {
+      const nomorWA = "6283879736645";
+      const nama = namaInput.value.trim();
+      const alamat = alamatInput.value.trim();
+      
+      const namaDisplay = nama || "[Name not filled]";
+      const alamatDisplay = alamat || "[Address not filled]";
+      
+      const pesan = `Halo! Saya mau pesan ${currentMenu.name} sebanyak ${jumlah} porsi.
+Total: Rp ${(currentMenu.price * jumlah).toLocaleString('id-ID')}
+Nama: ${namaDisplay}
+Alamat: ${alamatDisplay}`;
+      
+      waLink.href = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+    }
+
+    // ========== LISTENER UNTUK PERUBAHAN DI ADMIN ==========
+    function startStorageListener() {
+      // Listen untuk perubahan di localStorage
+      window.addEventListener('storage', (e) => {
+        if (e.key === MENU_STORAGE_KEY) {
+          menus = loadMenus();
+          
+          // Update current menu jika masih ada
+          const updatedCurrentMenu = menus.find(menu => menu.id === currentMenuId);
+          if (updatedCurrentMenu) {
+            currentMenu = updatedCurrentMenu;
+          } else {
+            // Jika menu dihapus, pindah ke menu utama
+            currentMenu = menus.find(menu => menu.id === 1) || menus[0];
+            currentMenuId = currentMenu.id;
+          }
+          
+          updateMenuDisplay();
+          loadMenuSelector();
+          
+          // Tampilkan notifikasi kecil (opsional)
+          console.log('Menu telah diperbarui dari Admin Panel');
+        }
+      });
+
+      // Juga check perubahan secara periodik (untuk tab yang sama)
+      setInterval(() => {
+        const latestMenus = loadMenus();
+        const currentString = JSON.stringify(menus);
+        const latestString = JSON.stringify(latestMenus);
+        
+        if (currentString !== latestString) {
+          menus = latestMenus;
+          
+          const updatedCurrentMenu = menus.find(menu => menu.id === currentMenuId);
+          if (updatedCurrentMenu) {
+            currentMenu = updatedCurrentMenu;
+          } else {
+            currentMenu = menus.find(menu => menu.id === 1) || menus[0];
+            currentMenuId = currentMenu.id;
+          }
+          
+          updateMenuDisplay();
+          loadMenuSelector();
+        }
+      }, 1000); // Check setiap 1 detik
+    }
+
+    // ========== STYLING UNTUK MENU SELECTOR ==========
+    const style = document.createElement('style');
+    style.textContent = `
+      .menu-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+
+      .menu-option {
+        padding: 10px 20px;
+        background: #ffecb3;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
+
+      .menu-option:hover {
+        background: #ffd54f;
+        transform: translateY(-2px);
+      }
+
+      .menu-option.active {
+        background: #ffb300;
+        color: white; 
+        border-color: #ff6f00;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

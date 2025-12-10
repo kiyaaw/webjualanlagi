@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dimsum Keju 😋</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+    :root {
+      --latar-atas: #fff9df;
+      --latar-bawah: #ffedb2;
+      --utama: #4a3b00;
+      --sorotan: #fcbf49;
+      --lembut: #6e5d27;
+      --kertas: #fffefa;
+      --bayangan: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Fredoka", sans-serif;
+      background: linear-gradient(180deg, var(--latar-atas), var(--latar-bawah));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--utama);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 🎵 MARQUEE STYLE */
+    .marquee {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      background: black;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      padding: 10px 0;
+      letter-spacing: 3px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      text-shadow: 1px 1px 3px rgba(255,255,255,0.3);
+    }
+    
+    .marquee span {
+      display: inline-block;
+      animation: move 18s linear infinite;
+    }
+
+    @keyframes move {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    header {
+      text-align: center;
+      animation: turunMasuk 1s ease;
+      margin-top: 80px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--sorotan);
+      text-shadow: 2px 2px 0px #fff, 3px 3px 8px rgba(0,0,0,0.2);
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 15px;
+      color: var(--lembut);
+    }
+
+    .kartu {
+      width: 400px;
+      background: var(--kertas);
+      border-radius: 22px;
+      border: 3px solid var(--utama);
+      box-shadow: var(--bayangan);
+      padding: 30px 25px;
+      margin-top: 30px;
+      transform: rotate(-2deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      animation: muncul 1s ease;
+    }
+
+    .kartu::after {
+      content: "🧀";
+      font-size: 70px;
+      color: rgba(255, 204, 102, 0.25);
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      transform: rotate(15deg);
+    }
+
+    .kartu:hover {
+      transform: rotate(0deg) scale(1.04);
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .kartu h2 {
+      margin: 0;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 700;
+    }
+    
+    .home-icon {
+      position: absolute;
+      top: 40px;
+      left: 12px;
+      font-size: 1.8em;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 5px;
+      transition: 0.2s ease;
+    }
+
+    .home-icon svg {
+      width: 2.5em;
+      height: 2.5em;
+      fill: black; 
+    }
+
+    .home-icon:hover {
+      transform: scale(1.12);
+    }
+    
+    .kartu hr {
+      border: none;
+      border-top: 2px dashed var(--sorotan);
+      width: 80%;
+      margin: 16px auto;
+    }
+
+    .keterangan {
+      font-size: 15px;
+      color: var(--lembut);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .keterangan strong {
+      color: var(--utama);
+    }
+
+    .catatan {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--lembut);
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--lembut);
+    }
+
+    @keyframes muncul {
+      from { opacity: 0; transform: scale(0.9) rotate(-8deg); }
+      to { opacity: 1; transform: scale(1) rotate(-2deg); }
+    }
+
+    @keyframes turunMasuk {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .kartu {
+        width: 90%;
+        padding: 22px;
+      }
+      header h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌟 MARQUEE -->
+  <div class="marquee">
+    <span>★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★</span>
+  </div>
+
+  <header>
+    <h1>🥢 DIMSUM KEJU</h1>
+    <p>Keju Leleh, Suasana Hati yang Lebih Baik 😋</p>
+  </header>
+   
+    <a href="beranda.html" class="home-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3L12 3z"/>
+      </svg>
+    </a>
+
+  <div class="kartu" id="kartuLokasi" title="Klik untuk lihat lokasi Dimsum Keju!">
+    <h2>📍Lokasi Dimsum Keju</h2>
+    <hr>
+
+    <div class="keterangan">
+      <strong>Jam Buka :</strong><br>
+      Setiap <b>Selasa sore</b> —  karena kami bersekolah di siang hari🎒<br>
+      <b>Open PO</b> karena kami bersekolah di siang hari~ 🧾
+    </div>
+
+    <div class="keterangan" style="margin-top: 12px;">
+      <strong>Alamat :</strong><br>
+      Perum Karangmas Indah<br>
+      Blok B9 No.01, Cikampek, Jawa Barat
+    </div>
+
+    <div class="catatan">🥟 Klik kartu untuk membuka Google Maps!</div>
+  </div>
+
+  <footer>
+    Dimsum Keju · Dibuat dengan kulit pangsit dan keju leleh 🧀💛
+  </footer>
+
+  <script>
+    const kartu = document.getElementById("kartuLokasi");
+
+    // Lokasi tetap (tujuan jualan)
+    const lokasiDimsum = {
+      lat: -6.3945627,
+      lng: 107.4363098
+    };
+
+    // Link fallback kalau lokasi pengguna gagal diambil
+    const linkCadangan = `https://www.google.com/maps/search/?api=1&query=${lokasiDimsum.lat},${lokasiDimsum.lng}`;
+
+    function bukaPeta(lat, lng) {
+      // Buka rute dari posisi pengguna ke lokasi jualan
+      const tautan = `https://www.google.com/maps/dir/?api=1&origin=${lat},${lng}&destination=${lokasiDimsum.lat},${lokasiDimsum.lng}`;
+      window.open(tautan, "_blank", "noopener");
+    }
+
+    function gagalAmbilLokasi(err) {
+      console.warn("Gagal ambil lokasi:", err);
+      // Kalau gagal, buka langsung lokasi Dimsum Keju
+      window.open(linkCadangan, "_blank", "noopener");
+    }
+
+    kartu.addEventListener("click", () => {
+      if (!navigator.geolocation) {
+        alert("Browser kamu belum dukung fitur lokasi 😢");
+        gagalAmbilLokasi();
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        posisi => bukaPeta(posisi.coords.latitude, posisi.coords.longitude),
+        err => gagalAmbilLokasi(err),
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+      );
+    });
+  </script>
+
+</body>
+
+</html>

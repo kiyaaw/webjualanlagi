@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Dimsum Store</title>
+<style>
+/* ========== GLOBAL STYLE ========== */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #ffedb2;
+  text-align: center;
+}
+
+/* ========== RUNNING TEXT (STORE) ========== */
+.store {
+  white-space: nowrap;
+  overflow: hidden;
+  background: black;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.store span {
+  display: inline-block;
+  animation: move 20s linear infinite;
+}
+
+.home-icon {
+  display: flex;
+  
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.home-icon svg {
+  width: 60px;
+  height: 60px;
+  fill: black; 
+}
+
+.home-icon:hover {
+  transform: scale(1.20);
+}
+
+@keyframes move {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.image{
+  display: flex;
+  height: 75px;
+  position: relative;
+  right: 20px;
+}
+
+/* ========== CARD CONTAINER ========== */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 50px;
+  height: 270px;
+}
+
+/* ========== CARD ========== */
+.card {
+  width: 200px;
+  height: 280px;
+  perspective: 1000px;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card:hover .inner {
+  transform: rotateY(180deg);
+}
+
+/* Front & Back */
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 3px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  background: white;
+}
+
+.front img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+.back {
+  background: #000;
+  transform: rotateY(180deg);
+}
+
+/* ========== FOOTER ========== */
+.sosmed {
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 140px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  padding: 15px 0;
+  margin-top: 126px;
+}
+
+.sosmed a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.cover {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+  }
+
+.dimsum{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.teks {
+    color: white;
+}
+
+.back a {
+  color: white; 
+  text-decoration: none;
+}
+
+.back a:hover {
+  color: #ffedb2; 
+  text-decoration: none;
+}
+
+.klik:hover {
+  color: #fde288; 
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<!-- RUNNING TEXT -->
+<div class="store">
+  <span>★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     HAPPY DIMSUM STORE     ★     </span>
+</div>
+
+<div class = "cover"> 
+  <a href="beranda1.html" class="home-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L2 12h3v9h6V15h2v6h6v-9h3L12 3z"/>
+      </svg>
+  </a>
+
+  <h1 class="dimsum" style="font-family: poppins, sans-serif; text-shadow: 4px 4px 7px rgb(184, 183, 183); border-color: hsl(46, 100%, 51%);" > DIMSUM GORENG KEJU </h1>
+
+  <img class="image" src = "logo.png">
+</div>
+
+<!-- CARDS -->
+<div class="container">
+  <div class="card">
+    <div class="inner">
+      <div class="front">
+        <img src="./testies.png" alt="testi">
+        <p>TESTIMONIALS</p>
+      </div>
+      <div class="back" title="click to see what they say">
+       <a href="testi.html"> 
+            What They Say
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="inner">
+      <div class="front">
+        <img src="./inside.png">
+        <p> WHAT'S INSIDE</p>
+      </div>
+      <div class="back" title="click to see the ingredients">
+        <a href="komposisi.html"> 
+            The Perfect Combination 
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="inner">
+      <div class="front">
+        <img src="./cart.png" alt="cart">
+        <p>ORDER HERE</p>
+      </div>
+      <div class="back" title="click to place your order">
+        <a href="order.html"> 
+            Place Your Order!
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="inner">
+      <div class="front">
+        <img src="./locationn.png" alt="location">
+        <p>LOCATION</p>
+      </div>
+      <div class="back" title="click to see where we at">
+        <a href="location.html"> 
+            Where to Find Us  
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="sosmed">
+  <a class="klik" href="https://www.tiktok.com/@happydim.store?_t=ZS-90wyFz4A9iu&_r=1" target="_blank">TikTok</a>
+  <a class="klik" href="https://www.instagram.com/happydimstore?igsh=YXJkaGxhdzc3NW9m" target="_blank">Instagram</a>
+  <a class="klik" href="https://x.com/happydimstore?s=21" target="_blank">X</a>
+  <a class="klik" href="https://youtube.com/@happydimstore?si=jxT4HL3GtUCepvpK" target="_blank">Youtube</a>
+  <a class="klik" href="https://www.facebook.com/share/1GapbA8Rz5/" target="_blank">Facebook</a>
+</div>
+
+</body>
+</html>
